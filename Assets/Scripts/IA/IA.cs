@@ -3,18 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class IA : MonoBehaviour {
+
+
+public abstract class IA : Destroyable {
     protected NavMeshAgent agent;
+    protected GameObject target;
+    protected float moveUpdateRate = 1;
+
+    [Header("BaseIA")]
+    public float damage = 1;
+    public float attackSpeed = 0.5f;
+
+	public override void Awake () {
+        agent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player");
+        init();
+
+        InvokeRepeating("attack", attackSpeed, attackSpeed);
+        InvokeRepeating("move", 0.1f, moveUpdateRate);
+    }
     
 
-	// Use this for initialization
-	void Awake () {
-        agent = GetComponent<NavMeshAgent>();
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    protected abstract void init();
+    protected abstract void attack();
+    protected abstract void move();
 }
