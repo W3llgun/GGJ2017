@@ -119,7 +119,7 @@ public class InterfaceController : MonoBehaviour {
             GameManager.instance.Reset();
             Time.timeScale = 1;
         }
-        lifeBar.gameObject.SetActive(!value);
+        lifeBar.transform.parent.gameObject.SetActive(!value);
         waveRestartBtn.SetActive(!value);
         panelChoice.SetActive(value);
     }
@@ -161,5 +161,17 @@ public class InterfaceController : MonoBehaviour {
     public void UpdateLife(float currentLife, float maxlife)
     {
         lifeBar.value = currentLife / maxlife;
+    }
+
+    public void Heal()
+    {
+        Destroyable dest = GameManager.player.GetComponent<Destroyable>();
+        if(dest && dest.life != dest.maxLife && GameManager.money > 0)
+        {
+            GameManager.money--;
+            UpdateMoney();
+            dest.reset();
+            UpdateLife(dest.life, dest.maxLife);
+        }
     }
 }

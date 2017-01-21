@@ -104,8 +104,8 @@ public class IAManager : MonoBehaviour {
     {
         Vector3 pos = spawns[Random.Range(0, spawns.Count)].position;
 
-        GameObject obj = (GameObject)Instantiate(prefab, this.transform);
-        obj.transform.position = pos;
+        GameObject obj = (GameObject)Instantiate(prefab, pos, Quaternion.identity);
+        obj.transform.SetParent(transform);
         playingIA.Add(obj);
     }
 

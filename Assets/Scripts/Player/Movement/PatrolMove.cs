@@ -6,29 +6,26 @@ using UnityEngine.AI;
 public class PatrolMove : Move
 {
     Transform home;
-    Vector3[] pos = new Vector3[4];
+    List<Transform> pos = new List<Transform>();
     int index = 0;
-    public PatrolMove(string pName, int pCost, float offset) : base(pName, pCost)
+    float offset;
+    public PatrolMove(string pName, int pCost, float offs) : base(pName, pCost)
     {
+        offset = offs;
         index = 0;
         home = GameObject.FindGameObjectWithTag("House").transform;
-        pos[0] = home.position;
-        pos[1] = home.position;
-        pos[2] = home.position;
-        pos[3] = home.position;
-
-        pos[0].x += offset;
-        pos[1].z += offset;
-        pos[2].x -= offset;
-        pos[3].z -= offset;
+        foreach (var item in home.GetComponent<House>().patrol)
+        {
+            pos.Add(item);
+        }
     }
 
     public override bool canMove(Vector3 mypos, Transform target)
     {
-        if (Vector3.Distance(pos[index], mypos) < 1)
+        if (Vector3.Distance(pos[index].position, mypos) < offset)
         {
             index++;
-            if (index >= pos.Length) index = 0;
+            if (index >= pos.Count) index = 0;
             targetLost();
         }
         return true;
@@ -36,6 +33,6 @@ public class PatrolMove : Move
 
     public override void move(Transform target)
     {
-        agent.SetDestination(pos[index]);
+        agent.SetDestination(pos[index].position);
     }
 }

@@ -8,10 +8,11 @@ public class Player : Destroyable {
     Target target;
     Move movement;
     Weapon weapon;
-    
+    Rigidbody rigid;
     public override void Start()
     {
         base.Start();
+        rigid = GetComponent<Rigidbody>();
         InterfaceController.instance.UpdateLife(life, maxLife);
     }
 
@@ -44,6 +45,7 @@ public class Player : Destroyable {
             movement.targetLost();
             target.UpdateTarget(transform.position);
         }
+        if (rigid) rigid.velocity = Vector3.zero;
     }
 
     protected override void dead()

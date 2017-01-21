@@ -33,12 +33,14 @@ public class GameManager : MonoBehaviour {
 
         // Target
         targetComponents.Add(new RNDTarget("Random", 0));
-        targetComponents.Add(new CloseTarget("Closest", 2));
+        targetComponents.Add(new WeakTarget("Weakest", 2));
+        targetComponents.Add(new CloseTarget("Closest", 6));
 
         // Movement
         moveComponents.Add(new Move("No Move", 0));
-        moveComponents.Add(new TargetMove("To Target", 1));
-        moveComponents.Add(new PatrolMove("Patrol", 2, 10));
+        moveComponents.Add(new RandomMove("Random", 1));
+        moveComponents.Add(new PatrolMove("Patrol", 2, 2));
+        moveComponents.Add(new TargetMove("To Target", 4));
 
         // Weapon
         weaponComponents.Add(new HandWP("Hand", 0));
@@ -51,7 +53,11 @@ public class GameManager : MonoBehaviour {
         if(player)
         {
             player.transform.position = basePos;
-            player.GetComponent<Destroyable>().reset();
+        }
+
+        foreach (Transform item in GameManager.instance.bulletHolder.transform)
+        {
+            Destroy(item.gameObject);
         }
     }
 }

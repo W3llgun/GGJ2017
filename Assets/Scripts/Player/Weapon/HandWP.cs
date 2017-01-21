@@ -7,9 +7,9 @@ public class HandWP : Weapon
 {
     public HandWP(string n, int c) : base(n, c)
     {
-        range = 1;
+        range = 1.5f;
         damage = 2;
-        attackSpeed = 0.8f;
+        attackSpeed = 0.4f;
     }
 
     public override void attack(GameObject target)

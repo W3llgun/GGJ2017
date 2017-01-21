@@ -42,7 +42,7 @@ public class GunWP : Weapon
         Vector3 targetDir = target.transform.position - GameManager.player.transform.position;
         GameObject obj = (GameObject)GameObject.Instantiate(bullet, GameManager.instance.bulletHolder.transform);
         obj.transform.position = GameManager.player.transform.position;
-        obj.GetComponent<Bullet>().init(targetDir, 5, 10, damage, target.tag);
+        obj.GetComponent<Bullet>().init(targetDir, 10, 100, damage, target.tag);
     }
 
 }
