@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class RNDTarget : Target
 {
+    public RNDTarget(string n, int c) : base(n, c)
+    {
+    }
+
     public override void UpdateTarget()
     {
         int count = IAManager.instance.listIA.Count;

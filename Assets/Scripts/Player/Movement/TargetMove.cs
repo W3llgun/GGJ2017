@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class TargetMove : Move
 {
-    public TargetMove(NavMeshAgent a) : base(a)
+    public TargetMove(string pName, int pCost) : base(pName, pCost)
     {
     }
 

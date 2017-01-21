@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Target{
+public abstract class Target : PlayerComponent
+{
     protected GameObject target = null;
-    
-	public GameObject Get
+
+    public Target(string n, int c):base(n,c)
+    {
+
+    }
+
+    public GameObject Get
     {
         get { return target; }
     }

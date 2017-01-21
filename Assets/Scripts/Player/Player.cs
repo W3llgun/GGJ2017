@@ -12,10 +12,12 @@ public class Player : Destroyable {
     public override void Awake()
     {
         base.Awake();
+        
 
-        target = new RNDTarget();
-        weapon = new HandWP();
-        movement = new TargetMove(GetComponent<NavMeshAgent>());
+        target = new RNDTarget("",0);
+        weapon = new HandWP("",0);
+        movement = new TargetMove("",0);
+        movement.setAgent(GetComponent<NavMeshAgent>());
     }
     
     public void Update()

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class HandWP : Weapon
 {
+    public HandWP(string n, int c) : base(n, c)
+    {
+    }
 
     public override void attack(GameObject target)
     {

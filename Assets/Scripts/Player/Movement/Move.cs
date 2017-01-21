@@ -4,10 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [System.Serializable]
-public class Move{
+public class Move : PlayerComponent
+{
     protected NavMeshAgent agent;
 
-    public Move(NavMeshAgent a)
+    public Move(string pName, int pCost) : base(pName, pCost)
+    {
+        
+    }
+
+    public void setAgent(NavMeshAgent a)
     {
         agent = a;
     }
