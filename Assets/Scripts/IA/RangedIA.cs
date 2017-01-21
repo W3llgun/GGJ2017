@@ -10,7 +10,8 @@ public class RangedIA : IA {
 
     protected override void init()
     {
-       
+        moveUpdateRate = 1f;
+        InvokeRepeating("move", 0.1f, moveUpdateRate);
     }
 
     protected override void attack()
@@ -20,7 +21,8 @@ public class RangedIA : IA {
 
     protected override void move()
     {
-        
+        if (agent.isOnNavMesh && target)
+            agent.SetDestination(target.transform.position);
     }
 
     void shoot()

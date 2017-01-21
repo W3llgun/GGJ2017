@@ -18,20 +18,28 @@ public class InterfaceController : MonoBehaviour {
     public GameObject panelEnd;
     public Text endGameText;
     public GameObject panelChoice;
+    public GameObject waveRestartBtn;
     public TableauComponent tables;
     public Text currentMoney;
     public Text currentWave;
+    public Slider lifeBar;
+
     float realMoney = 0;
 
     void Awake () {
         instance = this;
-        initialiseTable();
+        StartCoroutine(initialiseTable());
         currentMoney.text = ""+GameManager.money;
         currentWave.text = "" + GameManager.wave;
     }
 
-    void initialiseTable()
+    IEnumerator initialiseTable()
     {
+        while(GameManager.instance == null)
+        {
+            yield return 0;
+        }
+
         openChoice(true);
         int index = 0;
         // Weapon
@@ -92,7 +100,7 @@ public class InterfaceController : MonoBehaviour {
         }
     }
 
-    public void restart()
+    public void restartGame()
     {
         Time.timeScale = 1;
         SceneLoader.loadSceneIndex(SceneLoader.activeSceneIndex());
@@ -101,10 +109,18 @@ public class InterfaceController : MonoBehaviour {
     public void openChoice(bool value)
     {
         if (value)
+        {
             Time.timeScale = 0;
+            currentWave.text = "" + GameManager.wave;
+            UpdateMoney();
+        }
         else
+        {
+            GameManager.instance.Reset();
             Time.timeScale = 1;
-        GameManager.wave++;
+        }
+        lifeBar.gameObject.SetActive(!value);
+        waveRestartBtn.SetActive(!value);
         panelChoice.SetActive(value);
     }
 
@@ -132,6 +148,18 @@ public class InterfaceController : MonoBehaviour {
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().init();
             openChoice(false);
+            IAManager.instance.startWave();
         }
+    }
+
+    public void restartWave()
+    {
+        IAManager.instance.Restart();
+        openChoice(true);
+    }
+
+    public void UpdateLife(float currentLife, float maxlife)
+    {
+        lifeBar.value = currentLife / maxlife;
     }
 }

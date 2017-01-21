@@ -32,7 +32,8 @@ public class Tableau : MonoBehaviour
         if (transform.Find("Slider"))
             transform.Find("Slider").GetComponent<Slider>().value = 30;
         
-        grid.cellSize = new Vector2(this.GetComponent<RectTransform>().rect.width, grid.cellSize.y);
+       verticalScroll.value = 0;
+        grid.cellSize = new Vector2(this.GetComponent<RectTransform>().rect.width - 5, grid.cellSize.y);
     }
 
     // défile le tableau avec la roulette de la souris
@@ -43,6 +44,7 @@ public class Tableau : MonoBehaviour
         {
             verticalScroll.value += mouseWheel;
         }
+        
     }
 
     // Fermer le tableau

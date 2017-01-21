@@ -9,9 +9,9 @@ public class TargetMove : Move
     {
     }
 
-    public override bool canMove(Transform target)
+    public override bool canMove(Vector3 mypos, Transform target)
     {
-        return !agent.hasPath;
+        return target != null;
     }
 
     public override void move(Transform target)

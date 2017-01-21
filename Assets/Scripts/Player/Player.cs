@@ -9,9 +9,10 @@ public class Player : Destroyable {
     Move movement;
     Weapon weapon;
     
-    public override void Awake()
+    public override void Start()
     {
-        base.Awake();
+        base.Start();
+        InterfaceController.instance.UpdateLife(life, maxLife);
     }
 
     public void init()
@@ -33,7 +34,7 @@ public class Player : Destroyable {
                 weapon.attack(target.Get);
             }
 
-            if (movement.canMove(target.Get.transform))
+            if (movement.canMove(transform.position, target.Get.transform))
             {
                 movement.move(target.Get.transform);
             }
@@ -50,5 +51,9 @@ public class Player : Destroyable {
         InterfaceController.instance.endGame(false);
     }
 
-
+    public override void takeDamage(float dmg)
+    {
+        base.takeDamage(dmg);
+        InterfaceController.instance.UpdateLife(life, maxLife);
+    }
 }

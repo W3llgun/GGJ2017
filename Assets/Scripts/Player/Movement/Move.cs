@@ -18,7 +18,7 @@ public class Move : PlayerComponent
         agent = a;
     }
 
-    public virtual bool canMove(Transform target) { return false; }
+    public virtual bool canMove(Vector3 mypos, Transform target) { return false; }
 
     public virtual void move(Transform target) { }
 
