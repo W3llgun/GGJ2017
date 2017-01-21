@@ -7,6 +7,12 @@ public class RandomMove : Move
 {
     Vector3 position = Vector3.zero;
 
+    public override void init()
+    {
+        base.init();
+        position = Vector3.zero;
+    }
+
     public RandomMove(string pName, int pCost) : base(pName, pCost)
     {
         position = Vector3.zero;

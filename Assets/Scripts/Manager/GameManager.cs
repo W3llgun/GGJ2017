@@ -8,11 +8,12 @@ public class GameManager : MonoBehaviour {
     public GameObject bulletPrefab;
     public GameObject bulletHolder;
     public List<Target> targetComponents;
+    [HideInInspector]
     public List<Move> moveComponents;
     public List<Weapon> weaponComponents;
 
-    public static int wave = 0;
-    public static int money = 0;
+    public int wave = 1;
+    public int money = 0;
     public static Weapon selectedWeapon = null;
     public static Target selectedTarget = null;
     public static Move selectedMovement = null;
@@ -21,9 +22,7 @@ public class GameManager : MonoBehaviour {
     Vector3 basePos = Vector3.zero;
     void Awake () {
         instance = this;
-
-        wave = 1;
-        money = 10;
+        
         player = GameObject.FindGameObjectWithTag("Player");
         basePos = player.transform.position;
 
@@ -53,6 +52,7 @@ public class GameManager : MonoBehaviour {
         if(player)
         {
             player.transform.position = basePos;
+            player.GetComponent<Player>().init();
         }
 
         foreach (Transform item in GameManager.instance.bulletHolder.transform)

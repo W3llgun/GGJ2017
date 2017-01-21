@@ -29,8 +29,6 @@ public class InterfaceController : MonoBehaviour {
     void Awake () {
         instance = this;
         StartCoroutine(initialiseTable());
-        currentMoney.text = ""+GameManager.money;
-        currentWave.text = "" + GameManager.wave;
     }
 
     IEnumerator initialiseTable()
@@ -39,6 +37,8 @@ public class InterfaceController : MonoBehaviour {
         {
             yield return 0;
         }
+        currentMoney.text = "" + GameManager.instance.money;
+        currentWave.text = "" + GameManager.instance.wave;
 
         openChoice(true);
         int index = 0;
@@ -111,8 +111,7 @@ public class InterfaceController : MonoBehaviour {
         if (value)
         {
             Time.timeScale = 0;
-            currentWave.text = "" + GameManager.wave;
-            UpdateMoney();
+            currentWave.text = "" + GameManager.instance.wave;
         }
         else
         {
@@ -122,11 +121,12 @@ public class InterfaceController : MonoBehaviour {
         lifeBar.transform.parent.gameObject.SetActive(!value);
         waveRestartBtn.SetActive(!value);
         panelChoice.SetActive(value);
+        UpdateMoney();
     }
 
     public void UpdateMoney()
     {
-        realMoney = GameManager.money;
+        realMoney = GameManager.instance.money;
         if (GameManager.selectedMovement != null) realMoney -= GameManager.selectedMovement.cost;
         if (GameManager.selectedTarget != null) realMoney -= GameManager.selectedTarget.cost;
         if (GameManager.selectedWeapon != null) realMoney -= GameManager.selectedWeapon.cost;
@@ -155,6 +155,8 @@ public class InterfaceController : MonoBehaviour {
     public void restartWave()
     {
         IAManager.instance.Restart();
+        GameManager.instance.Reset();
+        UpdateMoney();
         openChoice(true);
     }
 
@@ -166,9 +168,9 @@ public class InterfaceController : MonoBehaviour {
     public void Heal()
     {
         Destroyable dest = GameManager.player.GetComponent<Destroyable>();
-        if(dest && dest.life != dest.maxLife && GameManager.money > 0)
+        if(dest && dest.life != dest.maxLife && GameManager.instance.money > 0)
         {
-            GameManager.money--;
+            GameManager.instance.money--;
             UpdateMoney();
             dest.reset();
             UpdateLife(dest.life, dest.maxLife);

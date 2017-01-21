@@ -7,7 +7,7 @@ public class SwordWP : Weapon
 {
     public SwordWP(string n, int c) : base(n, c)
     {
-        range = 2;
+        range = 3.5f;
         damage = 5;
         attackSpeed = 0.5f;
     }

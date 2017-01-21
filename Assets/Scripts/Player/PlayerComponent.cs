@@ -12,4 +12,6 @@ public class PlayerComponent {
         componentName = pName;
         cost = pCost;
     }
+
+    public virtual void init() { }
 }

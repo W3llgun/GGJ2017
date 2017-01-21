@@ -12,7 +12,7 @@ public class GunWP : Weapon
         bullet = prefabBullet;
         range = 40;
         damage = 5;
-        attackSpeed = 0.5f;
+        attackSpeed = 2f;
     }
 
     public override void attack(GameObject target)

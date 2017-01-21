@@ -22,6 +22,10 @@ public class Player : Destroyable {
         weapon = GameManager.selectedWeapon;
         movement = GameManager.selectedMovement;
         movement.setAgent(GetComponent<NavMeshAgent>());
+
+        target.init();
+        weapon.init();
+        movement.init();
     }
     
     public void Update()

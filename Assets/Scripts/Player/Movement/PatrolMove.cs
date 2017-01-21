@@ -9,6 +9,13 @@ public class PatrolMove : Move
     List<Transform> pos = new List<Transform>();
     int index = 0;
     float offset;
+
+    public override void init()
+    {
+        base.init();
+        index = 0;
+    }
+
     public PatrolMove(string pName, int pCost, float offs) : base(pName, pCost)
     {
         offset = offs;

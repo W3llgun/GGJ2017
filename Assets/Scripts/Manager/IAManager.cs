@@ -124,8 +124,8 @@ public class IAManager : MonoBehaviour {
         // END WAVE
         if (waves.Count > 0)
         {
-            GameManager.money += getMoney();
-            GameManager.wave++;
+            GameManager.instance.money += getMoney();
+            GameManager.instance.wave++;
             InterfaceController.instance.openChoice(true);
         }
         else

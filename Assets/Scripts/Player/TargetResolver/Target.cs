@@ -6,6 +6,7 @@ public abstract class Target : PlayerComponent
 {
     protected GameObject target = null;
 
+
     public Target(string n, int c):base(n,c)
     {
 
