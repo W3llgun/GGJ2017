@@ -22,39 +22,40 @@ public class InterfaceController : MonoBehaviour {
     void Awake () {
         instance = this;
         initialiseTable();
-        currentMoney.text = ""+GameManager.instance.money;
+        currentMoney.text = ""+GameManager.money;
     }
 
     void initialiseTable()
     {
+        openChoice(true);
         int index = 0;
         // Weapon
         tables.weaponTab.gameObject.SetActive(true);
-        tables.weaponTab.addElement("Weapon", "Cost", -1, false);
+        tables.weaponTab.addElement("Weapon", "Cost",ComponentType.None, -1, false);
         foreach (var wp in GameManager.instance.weaponComponents)
         {
-            tables.weaponTab.addElement(wp.Value.componentName, "" + wp.Value.cost, index);
+            tables.weaponTab.addElement(wp.componentName, "" + wp.cost, ComponentType.Weapon, index);
             index++;
         }
-        //tables.weaponTab.gameObject.SetActive(false);
         index = 0;
         // Target
         tables.targetTab.gameObject.SetActive(true);
-        tables.targetTab.addElement("Target Priority", "Cost", -1, false);
+        tables.targetTab.addElement("Target Priority", "Cost", ComponentType.None, -1, false);
         foreach (var tr in GameManager.instance.targetComponents)
         {
-            tables.targetTab.addElement(tr.Value.componentName, "" + tr.Value.cost, index);
+            tables.targetTab.addElement(tr.componentName, "" + tr.cost, ComponentType.Target, index);
+            index++;
         }
-        //tables.targetTab.gameObject.SetActive(false);
         index = 0;
         // Target
         tables.movementTab.gameObject.SetActive(true);
-        tables.movementTab.addElement("Movement", "Cost", -1, false);
+        tables.movementTab.addElement("Movement", "Cost", ComponentType.None, -1, false);
         foreach (var mv in GameManager.instance.moveComponents)
         {
-            tables.movementTab.addElement(mv.Value.componentName, "" + mv.Value.cost, index);
+            tables.movementTab.addElement(mv.componentName, "" + mv.cost, ComponentType.Movement, index);
+            index++;
         }
-        //tables.movementTab.gameObject.SetActive(false);
+        //openChoice(false);
     }
 
     public void Pause(bool value)
@@ -92,4 +93,21 @@ public class InterfaceController : MonoBehaviour {
         panelChoice.SetActive(value);
     }
 
+    public void UpdateMoney()
+    {
+        int realMoney = GameManager.money;
+        if (GameManager.selectedMovement != null) realMoney -= GameManager.selectedMovement.cost;
+        if (GameManager.selectedTarget != null) realMoney -= GameManager.selectedTarget.cost;
+        if (GameManager.selectedWeapon != null) realMoney -= GameManager.selectedWeapon.cost;
+
+        currentMoney.text = "" + realMoney;
+        if(realMoney < 0)
+        {
+            currentMoney.color = Color.red;
+        }
+        else
+        {
+            currentMoney.color = Color.white;
+        }
+    }
 }

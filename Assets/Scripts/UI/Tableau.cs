@@ -3,6 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+public enum ComponentType
+{
+    None,
+    Movement,
+    Target,
+    Weapon
+}
+
 /// <summary>
 /// Controlle un tableau, une liste ou un inventaire.
 /// </summary>
@@ -48,12 +56,22 @@ public class Tableau : MonoBehaviour
     
 
     // Ajoute un élément
-    public void addElement(string elemName, string elemCost, int index, bool active = true)
+    public void addElement(string elemName, string elemCost, ComponentType comp, int index, bool active = true)
     {
         GameObject obj = (GameObject)Instantiate(prefabTile, transform.position, transform.rotation);
         obj.transform.SetParent(content.transform);
         InventoryTile tile = obj.GetComponent<InventoryTile>();
-        tile.setTile(elemName, elemCost, index, active);
+        tile.setTile(elemName, elemCost, comp, index, this, active);
+        if (tiles.Count == 1) tile.mouseClick();
+
         tiles.Add(tile);
+    }
+
+    public void resetTile()
+    {
+        foreach (var t in tiles)
+        {
+            t.Reset();
+        }
     }
 }

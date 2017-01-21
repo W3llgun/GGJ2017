@@ -7,31 +7,31 @@ public class GameManager : MonoBehaviour {
 
     public GameObject bulletHolder;
 
-    public SortedList<int, Target> targetComponents;
-    public SortedList<int, Move> moveComponents;
-    public SortedList<int, Weapon> weaponComponents;
+    public List<Target> targetComponents;
+    public List<Move> moveComponents;
+    public List<Weapon> weaponComponents;
 
-    public int money = 10;
-    public static Weapon selectedWeapon;
-    public static Target selectedTarget;
-    public static Move selectedMovement;
+    public static int money = 10;
+    public static Weapon selectedWeapon = null;
+    public static Target selectedTarget = null;
+    public static Move selectedMovement = null;
 
     void Awake () {
         instance = this;
 
-        targetComponents = new SortedList<int, Target>();
-        moveComponents = new SortedList<int, Move>();
-        weaponComponents = new SortedList<int, Weapon>();
+        targetComponents = new List<Target>();
+        moveComponents = new List<Move>();
+        weaponComponents = new List<Weapon>();
 
         // Target
-        targetComponents.Add(0, new RNDTarget("Random", 0));
+        targetComponents.Add(new RNDTarget("Random", 0));
 
         // Movement
-        moveComponents.Add(0, new Move("No Move", 0));
-        moveComponents.Add(1, new TargetMove("To Target", 1));
+        moveComponents.Add(new Move("No Move", 0));
+        moveComponents.Add(new TargetMove("To Target", 1));
 
         // Weapon
-        weaponComponents.Add(0, new HandWP("Hand", 0));
+        weaponComponents.Add(new HandWP("Hand", 0));
     }
 
 
