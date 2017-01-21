@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
     public List<Move> moveComponents;
     public List<Weapon> weaponComponents;
 
-    public static int money = 10;
+    public static int money = 0;
     public static Weapon selectedWeapon = null;
     public static Target selectedTarget = null;
     public static Move selectedMovement = null;

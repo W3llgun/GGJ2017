@@ -12,11 +12,13 @@ public class Player : Destroyable {
     public override void Awake()
     {
         base.Awake();
-        
+    }
 
-        target = new RNDTarget("",0);
-        weapon = new HandWP("",0);
-        movement = new TargetMove("",0);
+    public void init()
+    {
+        target = GameManager.selectedTarget;
+        weapon = GameManager.selectedWeapon;
+        movement = GameManager.selectedMovement;
         movement.setAgent(GetComponent<NavMeshAgent>());
     }
     
@@ -43,8 +45,7 @@ public class Player : Destroyable {
 
     protected override void dead()
     {
-        print("P Dead");
-        // LOST
+        InterfaceController.instance.endGame(false);
     }
 
 

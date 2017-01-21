@@ -15,9 +15,12 @@ public class InterfaceController : MonoBehaviour {
     public static InterfaceController instance;
 
     public GameObject panelPause;
+    public GameObject panelEnd;
+    public Text endGameText;
     public GameObject panelChoice;
     public TableauComponent tables;
     public Text currentMoney;
+    float realMoney = 0;
 
     void Awake () {
         instance = this;
@@ -69,19 +72,28 @@ public class InterfaceController : MonoBehaviour {
 
     public void loadMenu()
     {
+        Time.timeScale = 1;
         SceneLoader.loadSceneName("Menu");
     }
 
     public void endGame(bool isWin)
     {
-        if(isWin)
+        Time.timeScale = 0;
+        panelEnd.SetActive(true);
+        if (isWin)
         {
-
+            endGameText.text = "You Win";
         }
         else
         {
-
+            endGameText.text = "Game Over";
         }
+    }
+
+    public void restart()
+    {
+        Time.timeScale = 1;
+        SceneLoader.loadSceneIndex(SceneLoader.activeSceneIndex());
     }
 
     public void openChoice(bool value)
@@ -95,7 +107,7 @@ public class InterfaceController : MonoBehaviour {
 
     public void UpdateMoney()
     {
-        int realMoney = GameManager.money;
+        realMoney = GameManager.money;
         if (GameManager.selectedMovement != null) realMoney -= GameManager.selectedMovement.cost;
         if (GameManager.selectedTarget != null) realMoney -= GameManager.selectedTarget.cost;
         if (GameManager.selectedWeapon != null) realMoney -= GameManager.selectedWeapon.cost;
@@ -108,6 +120,15 @@ public class InterfaceController : MonoBehaviour {
         else
         {
             currentMoney.color = Color.white;
+        }
+    }
+
+    public void isReady()
+    {
+        if(realMoney >= 0)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().init();
+            openChoice(false);
         }
     }
 }

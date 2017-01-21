@@ -10,7 +10,7 @@ public static class SceneLoader  {
         SceneManager.LoadScene(name);
     }
 
-    public static void loadSceneindex(int index)
+    public static void loadSceneIndex(int index)
     {
         SceneManager.LoadScene(index);
     }
