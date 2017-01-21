@@ -20,12 +20,14 @@ public class InterfaceController : MonoBehaviour {
     public GameObject panelChoice;
     public TableauComponent tables;
     public Text currentMoney;
+    public Text currentWave;
     float realMoney = 0;
 
     void Awake () {
         instance = this;
         initialiseTable();
         currentMoney.text = ""+GameManager.money;
+        currentWave.text = "" + GameManager.wave;
     }
 
     void initialiseTable()
@@ -102,6 +104,7 @@ public class InterfaceController : MonoBehaviour {
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
+        GameManager.wave++;
         panelChoice.SetActive(value);
     }
 

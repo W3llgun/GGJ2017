@@ -9,7 +9,7 @@ public class RNDTarget : Target
     {
     }
 
-    public override void UpdateTarget()
+    public override void UpdateTarget(Vector3 pos)
     {
         int count = IAManager.instance.listIA.Count;
         if(count > 0)

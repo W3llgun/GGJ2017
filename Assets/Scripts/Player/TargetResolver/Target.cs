@@ -21,6 +21,6 @@ public abstract class Target : PlayerComponent
         get { return target != null && target.activeSelf; }
     }
 
-    public abstract void UpdateTarget();
+    public abstract void UpdateTarget(Vector3 myPos);
 }
 

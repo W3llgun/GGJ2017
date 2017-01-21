@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public List<Move> moveComponents;
     public List<Weapon> weaponComponents;
 
+    public static int wave = 0;
     public static int money = 0;
     public static Weapon selectedWeapon = null;
     public static Target selectedTarget = null;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour {
 
     void Awake () {
         instance = this;
+        wave = 0;
+        money = 10;
 
         targetComponents = new List<Target>();
         moveComponents = new List<Move>();
@@ -25,6 +28,7 @@ public class GameManager : MonoBehaviour {
 
         // Target
         targetComponents.Add(new RNDTarget("Random", 0));
+        targetComponents.Add(new CloseTarget("Closest", 2));
 
         // Movement
         moveComponents.Add(new Move("No Move", 0));
@@ -32,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
         // Weapon
         weaponComponents.Add(new HandWP("Hand", 0));
+        weaponComponents.Add(new SwordWP("Sword", 2));
     }
 
 

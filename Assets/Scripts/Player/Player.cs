@@ -24,6 +24,8 @@ public class Player : Destroyable {
     
     public void Update()
     {
+        if (target == null) return;
+
         if(target.Exist)
         {
             if (weapon.canAttack(this.gameObject, target.Get))
@@ -39,7 +41,7 @@ public class Player : Destroyable {
         else
         {
             movement.targetLost();
-            target.UpdateTarget();
+            target.UpdateTarget(transform.position);
         }
     }
 

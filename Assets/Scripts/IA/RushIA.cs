@@ -30,7 +30,7 @@ public class RushIA : IA {
             {
                 dest.takeDamage(damage);
             }
-            Destroy(this.gameObject);
+            dead();
         }
     }
 
