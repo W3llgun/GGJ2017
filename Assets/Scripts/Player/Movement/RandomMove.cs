@@ -18,18 +18,19 @@ public class RandomMove : Move
         position = Vector3.zero;
     }
 
-    public override bool canMove(Vector3 mypos, Transform target)
+    public override bool canMove(Vector3 mypos, GameObject target)
     {
         if(Vector3.Distance(mypos, position) < 2 || position == Vector3.zero)
         {
-            position =  new Vector3(Random.Range(-15,15), mypos.y, Random.Range(-15, 15));
             targetLost();
+            position =  new Vector3(Random.Range(-15,15), mypos.y, Random.Range(-15, 15));
+            
             return true;
         }
         return false;
     }
 
-    public override void move(Transform target)
+    public override void move(GameObject target)
     {
         agent.SetDestination(position);
     }

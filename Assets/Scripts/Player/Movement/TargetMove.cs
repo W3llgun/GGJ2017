@@ -9,13 +9,13 @@ public class TargetMove : Move
     {
     }
 
-    public override bool canMove(Vector3 mypos, Transform target)
+    public override bool canMove(Vector3 mypos, GameObject target)
     {
         return target != null;
     }
 
-    public override void move(Transform target)
+    public override void move(GameObject target)
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(target.transform.position);
     }
 }

@@ -38,17 +38,18 @@ public class Player : Destroyable {
             {
                 weapon.attack(target.Get);
             }
-
-            if (movement.canMove(transform.position, target.Get.transform))
-            {
-                movement.move(target.Get.transform);
-            }
         }
         else
         {
             movement.targetLost();
             target.UpdateTarget(transform.position);
         }
+
+        if (movement.canMove(transform.position, target.Get))
+        {
+            movement.move(target.Get);
+        }
+
         if (rigid) rigid.velocity = Vector3.zero;
     }
 

@@ -27,7 +27,7 @@ public class PatrolMove : Move
         }
     }
 
-    public override bool canMove(Vector3 mypos, Transform target)
+    public override bool canMove(Vector3 mypos, GameObject target)
     {
         if (Vector3.Distance(pos[index].position, mypos) < offset)
         {
@@ -38,7 +38,7 @@ public class PatrolMove : Move
         return true;
     }
 
-    public override void move(Transform target)
+    public override void move(GameObject target)
     {
         agent.SetDestination(pos[index].position);
     }
