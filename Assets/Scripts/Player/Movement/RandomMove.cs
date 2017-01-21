@@ -24,7 +24,6 @@ public class RandomMove : Move
         {
             targetLost();
             position =  new Vector3(Random.Range(-15,15), mypos.y, Random.Range(-15, 15));
-            
             return true;
         }
         return false;
