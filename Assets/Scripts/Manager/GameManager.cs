@@ -17,10 +17,15 @@ public class GameManager : MonoBehaviour {
     public static Target selectedTarget = null;
     public static Move selectedMovement = null;
 
+    GameObject player;
+    Vector3 basePos = Vector3.zero;
     void Awake () {
         instance = this;
-        wave = 0;
+
+        wave = 1;
         money = 10;
+        player = GameObject.FindGameObjectWithTag("Player");
+        basePos = player.transform.position;
 
         targetComponents = new List<Target>();
         moveComponents = new List<Move>();
@@ -33,11 +38,19 @@ public class GameManager : MonoBehaviour {
         // Movement
         moveComponents.Add(new Move("No Move", 0));
         moveComponents.Add(new TargetMove("To Target", 1));
+        moveComponents.Add(new PatrolMove("Patrol", 2, 10));
 
         // Weapon
         weaponComponents.Add(new HandWP("Hand", 0));
         weaponComponents.Add(new SwordWP("Sword", 2));
     }
 
-
+    public void Reset()
+    {
+        if(player)
+        {
+            player.transform.position = basePos;
+            player.GetComponent<Destroyable>().reset();
+        }
+    }
 }

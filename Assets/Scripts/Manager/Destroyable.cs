@@ -7,9 +7,9 @@ public class Destroyable : MonoBehaviour {
     public float maxLife = 5;
     public float life = 0;
 
-    public virtual void Awake()
+    public virtual void Start()
     {
-        life = maxLife;
+        reset();
     }
 
     public virtual void takeDamage(float dmg)
@@ -22,5 +22,10 @@ public class Destroyable : MonoBehaviour {
     protected virtual void dead()
     {
         Destroy(this.gameObject);
+    }
+
+    public void reset()
+    {
+        life = maxLife;
     }
 }

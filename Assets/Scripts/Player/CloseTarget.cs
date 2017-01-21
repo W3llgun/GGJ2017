@@ -11,12 +11,12 @@ public class CloseTarget : Target
 
     public override void UpdateTarget(Vector3 pos)
     {
-        int count = IAManager.instance.listIA.Count;
+        int count = IAManager.instance.playingIA.Count;
         if(count > 0)
         {
             float bestDist = 9999;
             GameObject bestObj = null;
-            foreach (var ia in IAManager.instance.listIA)
+            foreach (var ia in IAManager.instance.playingIA)
             {
                 float dist = Vector3.Distance(ia.transform.position, pos);
                 if(dist < bestDist)

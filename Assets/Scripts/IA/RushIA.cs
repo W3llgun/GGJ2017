@@ -6,9 +6,11 @@ using UnityEngine;
 public class RushIA : IA {
     
 
+
     protected override void init()
     {
-
+        moveUpdateRate = 0.01f;
+        InvokeRepeating("move", 0.1f, moveUpdateRate);
     }
 
     protected override void attack()
@@ -17,7 +19,7 @@ public class RushIA : IA {
     
     protected override void move()
     {
-        if(agent.isOnNavMesh && target)
+        if (agent.isOnNavMesh && target)
         agent.SetDestination(target.transform.position);
     }
 

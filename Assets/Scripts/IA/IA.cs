@@ -14,14 +14,13 @@ public abstract class IA : Destroyable {
     public float damage = 1;
     public float attackSpeed = 0.5f;
 
-	public override void Awake () {
-        base.Awake();
+	public override void Start() {
+        base.Start();
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player");
         init();
 
         InvokeRepeating("attack", attackSpeed, attackSpeed);
-        InvokeRepeating("move", 0.1f, moveUpdateRate);
     }
     
 
@@ -31,7 +30,7 @@ public abstract class IA : Destroyable {
 
     protected override void dead()
     {
-        IAManager.instance.listIA.Remove(this.gameObject);
+        IAManager.instance.playingIA.Remove(this.gameObject);
         GameManager.money++;
         base.dead();
     }

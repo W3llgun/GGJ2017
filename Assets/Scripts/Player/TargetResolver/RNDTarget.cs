@@ -11,8 +11,8 @@ public class RNDTarget : Target
 
     public override void UpdateTarget(Vector3 pos)
     {
-        int count = IAManager.instance.listIA.Count;
+        int count = IAManager.instance.playingIA.Count;
         if(count > 0)
-        target =  IAManager.instance.listIA[UnityEngine.Random.Range(0, count)];
+        target =  IAManager.instance.playingIA[UnityEngine.Random.Range(0, count)];
     }
 }
