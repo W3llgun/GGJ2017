@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
+    public GameObject bulletPrefab;
     public GameObject bulletHolder;
-
     public List<Target> targetComponents;
     public List<Move> moveComponents;
     public List<Weapon> weaponComponents;
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     public static Target selectedTarget = null;
     public static Move selectedMovement = null;
 
-    GameObject player;
+    public static GameObject player;
     Vector3 basePos = Vector3.zero;
     void Awake () {
         instance = this;
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
         // Weapon
         weaponComponents.Add(new HandWP("Hand", 0));
         weaponComponents.Add(new SwordWP("Sword", 2));
+        weaponComponents.Add(new GunWP("Gun", 4, bulletPrefab));
     }
 
     public void Reset()
