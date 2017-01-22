@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CloseTarget : Target
 {
-    public CloseTarget(string n, int c) : base(n, c)
+    public CloseTarget(string n, int c, string t) : base(n, c, t)
     {
     }
 

@@ -7,10 +7,10 @@ public class GunWP : Weapon
 {
     GameObject bullet;
 
-    public GunWP(string n, int c, GameObject prefabBullet) : base(n, c)
+    public GunWP(string n, int c,string t, GameObject prefabBullet) : base(n, c, t)
     {
         bullet = prefabBullet;
-        range = 40;
+        range = 15;
         damage = 5;
         attackSpeed = 2f;
     }

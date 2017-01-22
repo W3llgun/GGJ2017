@@ -31,20 +31,21 @@ public class GameManager : MonoBehaviour {
         weaponComponents = new List<Weapon>();
 
         // Target
-        targetComponents.Add(new RNDTarget("Random", 0));
-        targetComponents.Add(new WeakTarget("Weakest", 2));
-        targetComponents.Add(new CloseTarget("Closest", 6));
+        targetComponents.Add(new RNDTarget("Random", 0, "Roll a dice before chosing a target"));
+        targetComponents.Add(new WeakTarget("Weakest", 2, "Kill children and women first !"));
+        targetComponents.Add(new CloseTarget("Closest", 6, "Don't get close scoundrel !"));
 
         // Movement
-        moveComponents.Add(new Move("No Move", 0));
-        moveComponents.Add(new RandomMove("Random", 1));
-        moveComponents.Add(new PatrolMove("Patrol", 2, 2));
-        moveComponents.Add(new TargetMove("To Target", 4));
+        moveComponents.Add(new Move("No Move", 0, "You can't move"));
+        moveComponents.Add(new RandomMove("Random", 1,"You can move"));
+        moveComponents.Add(new PatrolMove("Patrol", 2, "Turn around", 2));
+        moveComponents.Add(new TargetMove("To Target", 4, "Yeaaaaaaah !"));
 
         // Weapon
-        weaponComponents.Add(new HandWP("Hand", 0));
-        weaponComponents.Add(new SwordWP("Sword", 2));
-        weaponComponents.Add(new GunWP("Gun", 4, bulletPrefab));
+        weaponComponents.Add(new HandWP("Hand", 0, "Fight like a man"));
+        weaponComponents.Add(new SwordWP("Sword", 2, "More range, More damage"));
+        weaponComponents.Add(new ShieldWP("Shield", 3, "Low damage, Ignore projectile damage"));
+        weaponComponents.Add(new GunWP("Gun", 4, "Ranged and powerfull", bulletPrefab));
     }
 
     public void Reset()

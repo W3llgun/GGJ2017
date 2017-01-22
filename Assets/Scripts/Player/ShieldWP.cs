@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordWP : Weapon
+public class ShieldWP : Weapon
 {
-    public SwordWP(string n, int c, string t) : base(n, c, t)
+    public ShieldWP(string n, int c, string t) : base(n, c, t)
     {
-        range = 3.5f;
-        damage = 5;
-        attackSpeed = 0.5f;
+        range = 1.5f;
+        damage = 2;
+        attackSpeed = 0.4f;
     }
 
     public override void attack(GameObject target)

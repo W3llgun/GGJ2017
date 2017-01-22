@@ -16,7 +16,7 @@ public class PatrolMove : Move
         index = 0;
     }
 
-    public PatrolMove(string pName, int pCost, float offs) : base(pName, pCost)
+    public PatrolMove(string pName, int pCost, string t, float offs) : base(pName, pCost, t)
     {
         offset = offs;
         index = 0;

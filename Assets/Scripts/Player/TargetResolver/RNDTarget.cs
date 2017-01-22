@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RNDTarget : Target
 {
-    public RNDTarget(string n, int c) : base(n, c)
+    public RNDTarget(string n, int c, string t) : base(n, c, t)
     {
     }
 

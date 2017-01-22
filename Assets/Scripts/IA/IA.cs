@@ -13,6 +13,7 @@ public abstract class IA : Destroyable {
     [Header("BaseIA")]
     public float damage = 1;
     public float attackSpeed;
+    
 
 	public override void Start() {
         base.Start();

@@ -9,6 +9,8 @@ public class Player : Destroyable {
     Move movement;
     Weapon weapon;
     Rigidbody rigid;
+    public bool ignoreProjectile = false;
+
     public override void Start()
     {
         base.Start();
@@ -26,6 +28,15 @@ public class Player : Destroyable {
         target.init();
         weapon.init();
         movement.init();
+
+        if(weapon.componentName == "Shield")
+        {
+            ignoreProjectile = true;
+        }
+        else
+        {
+            ignoreProjectile = false;
+        }
     }
     
     public void Update()

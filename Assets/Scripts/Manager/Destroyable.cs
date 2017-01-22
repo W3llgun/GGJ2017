@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Destroyable : MonoBehaviour {
     [Header("Destroyable")]
     public float maxLife = 5;
     public float life = 0;
+    public Slider lifebar;
 
     public virtual void Start()
     {
@@ -17,6 +19,8 @@ public class Destroyable : MonoBehaviour {
         life -= dmg;
         if (life <= 0)
             dead();
+        else if(lifebar != null)
+            lifebar.value = life / maxLife;
     }
 
     protected virtual void dead()
@@ -27,5 +31,7 @@ public class Destroyable : MonoBehaviour {
     public void reset()
     {
         life = maxLife;
+        if (lifebar != null)
+            lifebar.value = life / maxLife;
     }
 }

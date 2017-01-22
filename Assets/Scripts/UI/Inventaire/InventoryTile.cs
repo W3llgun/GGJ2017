@@ -18,7 +18,7 @@ public class InventoryTile : MonoBehaviour
         get;set;
     }
 
-    public void setTile(string pLabel, string pCost, ComponentType comp, int pIndex, Tableau tab ,bool pActive)
+    public void setTile(string pLabel, string pCost, string tooltip, ComponentType comp, int pIndex, Tableau tab ,bool pActive)
     {
         actived = pActive;
         tableau = tab;
@@ -28,6 +28,7 @@ public class InventoryTile : MonoBehaviour
         cost.text = pCost;
         index = pIndex;
         type = comp;
+        GetComponent<TooltipTrigger>().text = tooltip;
         if (!actived)
         {
             setColor(Color.gray);

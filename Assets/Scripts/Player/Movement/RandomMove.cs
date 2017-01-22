@@ -13,7 +13,7 @@ public class RandomMove : Move
         position = Vector3.zero;
     }
 
-    public RandomMove(string pName, int pCost) : base(pName, pCost)
+    public RandomMove(string pName, int pCost, string pTooltip) : base(pName, pCost, pTooltip)
     {
         position = Vector3.zero;
     }

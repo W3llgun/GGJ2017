@@ -5,7 +5,8 @@ using UnityEngine;
 public enum IAType
 {
     Rush,
-    Ranged
+    Ranged,
+    Suicide
 }
 
 [System.Serializable]
@@ -29,9 +30,13 @@ public class WaveProperty
     [HideInInspector]
     public string Name = "Wave";
     public float spawnTime = 1f;
+    public float bonusLife = 0;
+    public float bonusDamage = 0;
     public List<Unit> units;
     public WaveProperty(WaveProperty wave)
     {
+        bonusDamage = wave.bonusDamage;
+        bonusLife = wave.bonusLife;
         spawnTime = wave.spawnTime;
         units = new List<Unit>(wave.units);
     }
@@ -45,6 +50,7 @@ public class IAManager : MonoBehaviour {
     [Header("Prefabs")]
     public GameObject rushUnit;
     public GameObject rangedUnit;
+    public GameObject suicideUnit;
 
     [Header("Property")]
     public List<Transform> spawns;
@@ -56,7 +62,6 @@ public class IAManager : MonoBehaviour {
         instance = this;        
     }
     
-
     public void startWave()
     {
         playingIA = new List<GameObject>();
@@ -71,8 +76,8 @@ public class IAManager : MonoBehaviour {
 
     IEnumerator playWave(WaveProperty wave)
     {
-        
-        while(wave.units.Count > 0)
+        InterfaceController.instance.updateWaveBonus(wave.bonusLife, wave.bonusDamage);
+        while (wave.units.Count > 0)
         {
             int rndIndex = Random.Range(0, wave.units.Count);
             IAType type = wave.units[rndIndex].type;
@@ -95,6 +100,9 @@ public class IAManager : MonoBehaviour {
             case IAType.Ranged:
                 spawnUnit(rangedUnit);
                 break;
+            case IAType.Suicide:
+                spawnUnit(suicideUnit);
+                break;
             default:
                 break;
         }
@@ -106,6 +114,13 @@ public class IAManager : MonoBehaviour {
 
         GameObject obj = (GameObject)Instantiate(prefab, pos, Quaternion.identity);
         obj.transform.SetParent(transform);
+        IA ia = obj.GetComponent<IA>();
+        if(ia)
+        {
+            ia.maxLife += currentWave.bonusLife;
+            ia.damage += currentWave.bonusDamage;
+            ia.reset();
+        }
         playingIA.Add(obj);
     }
 

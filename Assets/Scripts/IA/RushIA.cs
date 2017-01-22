@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RushIA : IA {
-    
 
+    public bool isSuicide = false;
+    protected float lastTimeAttack=0;
 
     protected override void init()
     {
@@ -28,12 +29,30 @@ public class RushIA : IA {
         if (other.collider.CompareTag(target.tag))
         {
             Destroyable dest = other.collider.GetComponent<Destroyable>();
-            if (dest)
+            if (isSuicide)
             {
-                dest.takeDamage(damage);
+                if (dest)
+                {
+                    dest.takeDamage(damage);
+                }
+                dead();
             }
-            dead();
+            else if (lastTimeAttack + attackSpeed < Time.time)
+            {
+                if (dest)
+                {
+                    dest.takeDamage(damage);
+                }
+                lastTimeAttack = Time.time;
+            }
+            smallBump();
         }
+    }
+
+    void smallBump()
+    {
+        // add anim
+        transform.position = transform.position - (transform.forward*02f);
     }
 
 }

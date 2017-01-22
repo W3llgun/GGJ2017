@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class HandWP : Weapon
 {
-    public HandWP(string n, int c) : base(n, c)
+    public HandWP(string n, int c, string t) : base(n, c,t)
     {
         range = 1.5f;
-        damage = 2;
-        attackSpeed = 0.4f;
+        damage = 1;
+        attackSpeed = 0.5f;
     }
 
     public override void attack(GameObject target)

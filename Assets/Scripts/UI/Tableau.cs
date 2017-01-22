@@ -58,12 +58,12 @@ public class Tableau : MonoBehaviour
     
 
     // Ajoute un élément
-    public void addElement(string elemName, string elemCost, ComponentType comp, int index, bool active = true)
+    public void addElement(string elemName, string elemCost,string tooltip ,ComponentType comp, int index, bool active = true)
     {
         GameObject obj = (GameObject)Instantiate(prefabTile, transform.position, transform.rotation);
         obj.transform.SetParent(content.transform);
         InventoryTile tile = obj.GetComponent<InventoryTile>();
-        tile.setTile(elemName, elemCost, comp, index, this, active);
+        tile.setTile(elemName, elemCost, tooltip, comp, index, this, active);
         if (tiles.Count == 1) tile.mouseClick();
 
         tiles.Add(tile);

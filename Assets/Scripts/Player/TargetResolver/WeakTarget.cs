@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WeakTarget : Target
 {
-    public WeakTarget(string n, int c) : base(n, c)
+    public WeakTarget(string n, int c, string t) : base(n, c, t)
     {
     }
 

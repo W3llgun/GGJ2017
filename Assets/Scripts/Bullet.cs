@@ -53,8 +53,19 @@ public class Bullet : MonoBehaviour {
             Destroyable dest = other.GetComponent<Destroyable>();
             if (dest)
             {
-                dest.takeDamage(damage);
+                if (other.GetComponent<Player>() && other.GetComponent<Player>().ignoreProjectile)
+                {
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    dest.takeDamage(damage);
+                }
             }
+            Destroy(this.gameObject);
+        }
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Props"))
+        {
             Destroy(this.gameObject);
         }
     }

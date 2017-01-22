@@ -8,7 +8,7 @@ public abstract class Weapon : PlayerComponent
     public float damage = 1;
     public float attackSpeed = 0.5f;
     protected float lastAttackTime = 0;
-    public Weapon(string n , int c):base(n,c)
+    public Weapon(string n , int c, string pTooltip) :base(n,c, pTooltip)
     {
 
     }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class TargetMove : Move
 {
-    public TargetMove(string pName, int pCost) : base(pName, pCost)
+    public TargetMove(string pName, int pCost, string t) : base(pName, pCost, t)
     {
     }
 

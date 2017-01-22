@@ -8,7 +8,7 @@ public class Move : PlayerComponent
 {
     protected NavMeshAgent agent;
 
-    public Move(string pName, int pCost) : base(pName, pCost)
+    public Move(string pName, int pCost, string tooltip) : base(pName, pCost, tooltip)
     {
         
     }

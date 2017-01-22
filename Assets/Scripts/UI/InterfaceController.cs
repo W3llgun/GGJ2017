@@ -24,6 +24,10 @@ public class InterfaceController : MonoBehaviour {
     public Text currentWave;
     public Slider lifeBar;
 
+    [Header("Wave Bonus")]
+    public Text bonusLife;
+    public Text bonusDamage;
+
     float realMoney = 0;
 
     void Awake () {
@@ -44,28 +48,28 @@ public class InterfaceController : MonoBehaviour {
         int index = 0;
         // Weapon
         tables.weaponTab.gameObject.SetActive(true);
-        tables.weaponTab.addElement("Weapon", "Cost",ComponentType.None, -1, false);
+        tables.weaponTab.addElement("Weapon", "Cost","Choose your weapon",ComponentType.None, -1, false);
         foreach (var wp in GameManager.instance.weaponComponents)
         {
-            tables.weaponTab.addElement(wp.componentName, "" + wp.cost, ComponentType.Weapon, index);
+            tables.weaponTab.addElement(wp.componentName, "" + wp.cost, wp.tooltip, ComponentType.Weapon, index);
             index++;
         }
         index = 0;
         // Target
         tables.targetTab.gameObject.SetActive(true);
-        tables.targetTab.addElement("Target Priority", "Cost", ComponentType.None, -1, false);
+        tables.targetTab.addElement("Target Priority", "Cost", "Target priority", ComponentType.None, -1, false);
         foreach (var tr in GameManager.instance.targetComponents)
         {
-            tables.targetTab.addElement(tr.componentName, "" + tr.cost, ComponentType.Target, index);
+            tables.targetTab.addElement(tr.componentName, "" + tr.cost,tr.tooltip, ComponentType.Target, index);
             index++;
         }
         index = 0;
-        // Target
+        // Movement
         tables.movementTab.gameObject.SetActive(true);
-        tables.movementTab.addElement("Movement", "Cost", ComponentType.None, -1, false);
+        tables.movementTab.addElement("Movement", "Cost", "How to move", ComponentType.None, -1, false);
         foreach (var mv in GameManager.instance.moveComponents)
         {
-            tables.movementTab.addElement(mv.componentName, "" + mv.cost, ComponentType.Movement, index);
+            tables.movementTab.addElement(mv.componentName, "" + mv.cost,mv.tooltip, ComponentType.Movement, index);
             index++;
         }
         //openChoice(false);
@@ -175,5 +179,23 @@ public class InterfaceController : MonoBehaviour {
             dest.reset();
             UpdateLife(dest.life, dest.maxLife);
         }
+    }
+
+    public void switchTooltip(bool value)
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Tile");
+        foreach (var tile in objs)
+        {
+            if(tile.GetComponent<TooltipTrigger>())
+            {
+                tile.GetComponent<TooltipTrigger>().enabled = value;
+            }
+        }
+    }
+
+    public void updateWaveBonus(float life, float dmg)
+    {
+        bonusLife.text = "" + life;
+        bonusDamage.text = "" + dmg;
     }
 }
