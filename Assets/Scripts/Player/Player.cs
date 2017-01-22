@@ -5,15 +5,20 @@ using UnityEngine.AI;
 
 public class Player : Destroyable {
 
+    Animator animator;
     Target target;
     Move movement;
     Weapon weapon;
     Rigidbody rigid;
     public bool ignoreProjectile = false;
+    string animatorTriggerName = "";
+    public GameObject sword;
+    public Transform body;
 
     public override void Start()
     {
         base.Start();
+        animator = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         InterfaceController.instance.UpdateLife(life, maxLife);
     }
@@ -37,6 +42,19 @@ public class Player : Destroyable {
         {
             ignoreProjectile = false;
         }
+        animatorTriggerName = "AttackSword";
+        if (weapon.componentName == "Gun")
+        {
+            animatorTriggerName = "AttackGun";
+        }
+        else if (weapon.componentName == "Sword")
+        {
+            sword.SetActive(true);
+        }
+        else
+        {
+            sword.SetActive(false);
+        }
     }
     
     public void Update()
@@ -48,7 +66,13 @@ public class Player : Destroyable {
             if (weapon.canAttack(this.gameObject, target.Get))
             {
                 weapon.attack(target.Get);
+                if (animator)
+                {
+                    animator.SetTrigger(animatorTriggerName);
+                }
+                
             }
+            transform.LookAt(target.Get.transform);
         }
         else
         {

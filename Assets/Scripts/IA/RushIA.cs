@@ -31,6 +31,7 @@ public class RushIA : IA {
     {
         if (other.collider.CompareTag(target.tag))
         {
+            Debug.Log("fezsfes");
             Destroyable dest = other.collider.GetComponent<Destroyable>();
             if (isSuicide)
             {
@@ -48,7 +49,7 @@ public class RushIA : IA {
                     dest.takeDamage(damage);
                 }
                 lastTimeAttack = Time.time;
-                agent.Stop();
+                if(agent && agent.isActiveAndEnabled) agent.Stop();
                 if (animator) animator.SetTrigger("Attack");
             }
             

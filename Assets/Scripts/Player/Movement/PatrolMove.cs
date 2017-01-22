@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class PatrolMove : Move
 {
-    Transform home;
+    Transform patrol;
     List<Transform> pos = new List<Transform>();
     int index = 0;
     float offset;
@@ -20,8 +20,8 @@ public class PatrolMove : Move
     {
         offset = offs;
         index = 0;
-        home = GameObject.FindGameObjectWithTag("House").transform;
-        foreach (var item in home.GetComponent<House>().patrol)
+        patrol = GameObject.FindGameObjectWithTag("Patrol").transform;
+        foreach (Transform item in patrol)
         {
             pos.Add(item);
         }
@@ -29,17 +29,17 @@ public class PatrolMove : Move
 
     public override bool canMove(Vector3 mypos, GameObject target)
     {
-        if (Vector3.Distance(pos[index].position, mypos) < offset)
+        if (Vector3.Distance(mypos, pos[index].position) < offset)
         {
             index++;
             if (index >= pos.Count) index = 0;
-            targetLost();
         }
+        agent.SetDestination(pos[index].position);
         return true;
     }
 
     public override void move(GameObject target)
     {
-        agent.SetDestination(pos[index].position);
+        //agent.SetDestination(pos[index].position);
     }
 }

@@ -32,7 +32,6 @@ public abstract class IA : Destroyable {
     protected override void dead()
     {
         IAManager.instance.playingIA.Remove(this.gameObject);
-        GameManager.instance.money++;
         base.dead();
     }
 }
