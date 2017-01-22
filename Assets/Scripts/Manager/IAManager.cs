@@ -29,12 +29,15 @@ public class WaveProperty
 {
     [HideInInspector]
     public string Name = "Wave";
+    [Range(1,5)]
+    public int gems = 1;
     public float spawnTime = 1f;
     public float bonusLife = 0;
     public float bonusDamage = 0;
     public List<Unit> units;
     public WaveProperty(WaveProperty wave)
     {
+        gems = wave.gems;
         bonusDamage = wave.bonusDamage;
         bonusLife = wave.bonusLife;
         spawnTime = wave.spawnTime;
@@ -168,11 +171,11 @@ public class IAManager : MonoBehaviour {
 
     int getMoney()
     {
-        int num = 0;
-        foreach (var item in currentWave.units)
-        {
-            num += item.Number;
-        }
-        return num;
+        //int num = 0;
+        //foreach (var item in currentWave.units)
+        //{
+        //    num += item.Number;
+        //}
+        return currentWave.gems;
     }
 }

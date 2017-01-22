@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour {
 
         // Target
         targetComponents.Add(new RNDTarget("Random", 0, "Roll a dice before chosing a target"));
-        targetComponents.Add(new WeakTarget("Weakest", 2, "Kill children and women first !"));
+        targetComponents.Add(new WeakTarget("Weakest", 2, "Kill children and women first ! (Low life)"));
+        targetComponents.Add(new StrongTarget("Strongest", 3, "Target based on most damage"));
         targetComponents.Add(new CloseTarget("Closest", 6, "Don't get close scoundrel !"));
 
         // Movement

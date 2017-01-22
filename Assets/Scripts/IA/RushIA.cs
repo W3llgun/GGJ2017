@@ -20,8 +20,11 @@ public class RushIA : IA {
     
     protected override void move()
     {
-        if (agent.isOnNavMesh && target)
-        agent.SetDestination(target.transform.position);
+        if (agent.isOnNavMesh && target && lastTimeAttack + attackSpeed < Time.time)
+        {
+            agent.SetDestination(target.transform.position);
+            agent.Resume();
+        }
     }
 
     private void OnCollisionEnter(Collision other)
@@ -35,6 +38,7 @@ public class RushIA : IA {
                 {
                     dest.takeDamage(damage);
                 }
+                if (animator) animator.SetTrigger("Attack");
                 dead();
             }
             else if (lastTimeAttack + attackSpeed < Time.time)
@@ -44,7 +48,10 @@ public class RushIA : IA {
                     dest.takeDamage(damage);
                 }
                 lastTimeAttack = Time.time;
+                agent.Stop();
+                if (animator) animator.SetTrigger("Attack");
             }
+            
             smallBump();
         }
     }
